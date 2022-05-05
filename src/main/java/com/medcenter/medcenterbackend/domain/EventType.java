@@ -1,0 +1,4 @@
+package com.medcenter.medcenterbackend.domain;
+
+public enum EventType {
+}
