@@ -1,0 +1,31 @@
+package com.turbodriver.employee.exposition;
+
+import com.turbodriver.employee.exposition.dto.EmployeeGetResponse;
+import com.turbodriver.employee.exposition.dto.EmployeeMapper;
+import com.turbodriver.employee.exposition.dto.EmployeeRegistrationRequest;
+import com.turbodriver.employee.service.EmployeeServiceImpl;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@Slf4j
+@RestController
+@RequestMapping("api/v1/employees")
+@RequiredArgsConstructor
+public class EmployeeController {
+
+    private final EmployeeServiceImpl employeeService;
+    private final EmployeeMapper mapper;
+
+    @PostMapping
+    public void registerEmployee(@RequestBody EmployeeRegistrationRequest employeeRegistrationRequest){
+        log.info("new customer registration {}", employeeRegistrationRequest);
+        employeeService.registerEmployee(employeeRegistrationRequest);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EmployeeGetResponse> getEmployee(@PathVariable("id") String id){
+        return ResponseEntity.ok(mapper.mapToGetDTO(employeeService.getEmployee(id)));
+    }
+}
