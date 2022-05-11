@@ -4,6 +4,7 @@ import com.turbodriver.employee.exception.UserAlreadyExists;
 import com.turbodriver.employee.exception.UserNotFound;
 import com.turbodriver.employee.exposition.dto.EmployeeRegistrationRequest;
 import com.turbodriver.employee.model.Employee;
+import com.turbodriver.employee.model.Job;
 import com.turbodriver.employee.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .email(request.getEmail())
                 .dateOfBirth(Date.from(Instant.now()))
                 .hiringDate(Date.from(Instant.now()))
+                .jobTitle(Job.valueOf(request.getJobTitle()))
                 .salary(BigDecimal.valueOf(1000))
                 .build();
         //TODO: check if email is valid

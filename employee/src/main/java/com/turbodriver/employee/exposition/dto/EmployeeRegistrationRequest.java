@@ -14,8 +14,9 @@ public class EmployeeRegistrationRequest {
     private String firstName;
     private String lastName;
     private String email;
-    private String hiring_date;
-    private String date_of_birth;
+    private String hiringDate;
+    private String dateOfBirth;
+    private String jobTitle;
     private String salary;
 
 }
