@@ -32,7 +32,7 @@ public class Employee {
     private Date hiringDate;
     private Date dateOfBirth;
     private BigDecimal salary;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Job jobTitle;
     private Boolean isManager;
 }
