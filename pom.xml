@@ -8,7 +8,8 @@
 		<module>employee</module>
         <module>carfleet</module>
 		<module>eureka-server</module>
-	</modules>
+        <module>clients</module>
+    </modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -68,6 +69,11 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct-processor</artifactId>
 			<version>1.4.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>3.1.2</version>
 		</dependency>
 	</dependencies>
 

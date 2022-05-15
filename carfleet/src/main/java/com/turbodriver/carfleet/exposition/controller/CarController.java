@@ -1,10 +1,10 @@
 package com.turbodriver.carfleet.exposition.controller;
 
-import com.turbodriver.carfleet.exposition.dto.car.CarGetDto;
 import com.turbodriver.carfleet.exposition.dto.car.CarPostDto;
 import com.turbodriver.carfleet.exposition.mapper.car.CarMapper;
 import com.turbodriver.carfleet.model.Car;
 import com.turbodriver.carfleet.service.car.CarServiceImpl;
+import com.turbodriver.clients.carfleet.CarGetDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
