@@ -1,4 +1,4 @@
-package com.turbodriver.carfleet.exposition.dto.car;
+package com.turbodriver.employee.exposition.external;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,12 +7,12 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class CarGetDto {
+public class CarResponse {
     public String carId;
-    public String driverId;
     public String carMake;
     public String carModel;
     public String fabricationDate;
     public String literPer100Km;
     public String acquisitionDate;
+
 }

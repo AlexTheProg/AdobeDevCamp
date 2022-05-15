@@ -5,6 +5,11 @@ import com.turbodriver.carfleet.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Service
 @RequiredArgsConstructor
 public class CarServiceImpl implements CarService{
@@ -12,7 +17,10 @@ public class CarServiceImpl implements CarService{
     private final CarRepository carRepo;
 
     @Override
+    @Transactional
     public Car addCar(Car newCar) {
+        newCar.setAcquisitionDate(Date.from(Instant.now()));
+        newCar.setFabricationDate(LocalDateTime.from(LocalDateTime.now()));
         return carRepo.save(newCar);
     }
 
@@ -29,9 +37,9 @@ public class CarServiceImpl implements CarService{
                 .carFleet(updateCar.getCarFleet())
                 .driverId(updateCar.getDriverId())
                 .carMake(updateCar.getCarMake())
-                .model(updateCar.getModel())
-                .acquisitionDate(updateCar.getAcquisitionDate())
-                .fabricationDate(updateCar.getFabricationDate())
+                .carModel(updateCar.getCarModel())
+                .acquisitionDate(Date.from(Instant.now()))
+                .fabricationDate(LocalDateTime.from(LocalDateTime.now()))
                 .literPer100Km(updateCar.getLiterPer100Km())
                 .build();
         return carRepo.save(newCar);
