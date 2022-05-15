@@ -2,6 +2,7 @@ package com.turbodriver.employee.service;
 
 import com.turbodriver.employee.exception.UserAlreadyExists;
 import com.turbodriver.employee.exception.UserNotFound;
+import com.turbodriver.employee.exposition.dto.CarGetResponse;
 import com.turbodriver.employee.exposition.dto.EmployeeRegistrationRequest;
 import com.turbodriver.employee.model.Employee;
 import com.turbodriver.employee.model.Job;
@@ -49,9 +50,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepo.save(employee);
     }
 
+
+
     @Override
     public Employee getEmployee(String id) {
         return employeeRepo.findById(Integer.parseInt(id)).orElseThrow(UserNotFound::new);
+    }
+
+    @Override
+    public CarGetResponse checkDriverCarData(String id) {
+        Employee employee = employeeRepo
+                .findById(Integer.parseInt(id))
+                .orElseThrow(UserNotFound::new);
+        return restTemplate.getForObject(
+                "http://CARFLEET/api/v1/cars/{driverId}",
+                CarGetResponse.class,
+                id
+        );
     }
 
 }

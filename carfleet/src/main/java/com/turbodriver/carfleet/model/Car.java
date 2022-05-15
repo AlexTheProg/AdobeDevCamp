@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 
 
 @Data
@@ -28,13 +30,13 @@ public class Car {
     private Integer carId;
     private Integer driverId;
     private String carMake;
-    private String model;
-    private Date fabricationDate;
+    private String carModel;
+    private LocalDateTime fabricationDate;
     private Double literPer100Km;
     private Date acquisitionDate;
 
     @ManyToOne
-    @JoinColumn(name = "carFleetId", nullable = false)
+    @JoinColumn(name = "carFleetId")
     private CarFleet carFleet;
 
 }
