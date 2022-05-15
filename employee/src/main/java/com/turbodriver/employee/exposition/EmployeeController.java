@@ -1,5 +1,6 @@
 package com.turbodriver.employee.exposition;
 
+import com.turbodriver.clients.carfleet.CarGetDto;
 import com.turbodriver.employee.exposition.dto.CarGetResponse;
 import com.turbodriver.employee.exposition.dto.EmployeeGetResponse;
 import com.turbodriver.employee.exposition.dto.EmployeeMapper;
@@ -31,7 +32,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/check-driver-car/{driverId}")
-    public ResponseEntity<CarGetResponse> getDriverCarData(@PathVariable("driverId") String id){
+    public ResponseEntity<CarGetDto> getDriverCarData(@PathVariable("driverId") String id){
         return ResponseEntity.ok(employeeService.checkDriverCarData(id));
     }
 }
