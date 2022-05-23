@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+
 @Slf4j
 @RestController
 @RequestMapping("api/v1/employees")
@@ -34,5 +36,10 @@ public class EmployeeController {
     @GetMapping("/check-driver-car/{driverId}")
     public ResponseEntity<CarGetDto> getDriverCarData(@PathVariable("driverId") String id){
         return ResponseEntity.ok(employeeService.checkDriverCarData(id));
+    }
+
+    @GetMapping("/car-conformity/{driverId}")
+    public ResponseEntity<?> checkCarIsValid(@PathVariable("driverId") String id) throws ParseException {
+        return ResponseEntity.ok(employeeService.isCarInConformity(id));
     }
 }

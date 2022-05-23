@@ -33,7 +33,7 @@ public class Car {
     private String carModel;
     private LocalDateTime fabricationDate;
     private Double literPer100Km;
-    private Date acquisitionDate;
+    private LocalDateTime acquisitionDate;
 
     @ManyToOne
     @JoinColumn(name = "carFleetId")

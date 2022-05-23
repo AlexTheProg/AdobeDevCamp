@@ -1,13 +1,13 @@
 server:
-  port: 8080
+  port: 8082
 
 spring:
   application:
-    name: employee
+    name: notification
   datasource:
-    password: 'alex1999'
-    url: jdbc:postgresql://localhost:5432/employee
-    username: 'alex'
+    password: alex1999
+    url: jdbc:postgresql://localhost:5432/notification
+    username: alex
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -21,6 +21,6 @@ spring:
 eureka:
   client:
     service-url:
-      default-zone: http://localhost:8761/eureka
+      defaultZone: http://localhost:8761/eureka
     fetch-registry: true
     register-with-eureka: true

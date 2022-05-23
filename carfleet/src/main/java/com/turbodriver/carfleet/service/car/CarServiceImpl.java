@@ -19,7 +19,7 @@ public class CarServiceImpl implements CarService{
     @Override
     @Transactional
     public Car addCar(Car newCar) {
-        newCar.setAcquisitionDate(Date.from(Instant.now()));
+        newCar.setAcquisitionDate(LocalDateTime.now());
         newCar.setFabricationDate(LocalDateTime.from(LocalDateTime.now()));
         return carRepo.save(newCar);
     }
@@ -38,7 +38,7 @@ public class CarServiceImpl implements CarService{
                 .driverId(updateCar.getDriverId())
                 .carMake(updateCar.getCarMake())
                 .carModel(updateCar.getCarModel())
-                .acquisitionDate(Date.from(Instant.now()))
+                .acquisitionDate(LocalDateTime.now())
                 .fabricationDate(LocalDateTime.from(LocalDateTime.now()))
                 .literPer100Km(updateCar.getLiterPer100Km())
                 .build();
