@@ -1,8 +1,8 @@
 package com.turbodriver.employee.service;
 
+import com.turbodriver.amqp.RabbitMQMessageProducer;
 import com.turbodriver.clients.carfleet.CarFleetClient;
 import com.turbodriver.clients.carfleet.CarGetDto;
-import com.turbodriver.clients.notification.NotificationClient;
 import com.turbodriver.clients.notification.NotificationRequest;
 import com.turbodriver.employee.exception.UserAlreadyExists;
 import com.turbodriver.employee.exception.UserNotFound;
@@ -12,25 +12,20 @@ import com.turbodriver.employee.model.Job;
 import com.turbodriver.employee.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
 import java.math.BigDecimal;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+
 
 @Service
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepo;
-    private final RestTemplate restTemplate;
     private final CarFleetClient carFleetClient;
-    private final NotificationClient notificationClient;
+    private final RabbitMQMessageProducer messageProducer;
 
     @Override
     public void registerEmployee(EmployeeRegistrationRequest request) {
@@ -50,12 +45,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepo.saveAndFlush(employee);
 
-        notificationClient.sendNotification(
-                new NotificationRequest(
-                        employee.getId(),
-                        employee.getEmail(),
-                        String.format("Hi %s, welcome to TurboDriver ", employee.getFirstName())
-                )
+        NotificationRequest notificationRequest = new NotificationRequest(
+                employee.getId(),
+                employee.getEmail(),
+                String.format("Hi %s, welcome to TurboDriver ", employee.getFirstName())
+        );
+        messageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
         );
     }
 
